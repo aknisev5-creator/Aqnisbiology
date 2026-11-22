@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aqnis biology</title>
+<style>
+:root{--bg:#f4faf6;--card:#fff;--ink:#23392f;--mut:#5f7a6b;--g1:#e3f3ea;--g2:#bfe3cf;--g3:#4f9b78;--line:#d6e9de;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121d17;--card:#1b2b22;--ink:#e6f3ea;--mut:#9bb8a8;--g1:#22372c;--g2:#2f5543;--g3:#7cc7a0;--line:#2c4538;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121d17;--card:#1b2b22;--ink:#e6f3ea;--mut:#9bb8a8;--g1:#22372c;--g2:#2f5543;--g3:#7cc7a0;--line:#2c4538;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:8px 14px;align-items:center}
+nav .lg{font-weight:700;margin-right:8px;white-space:nowrap;color:var(--ink);text-decoration:none}nav .lg span{color:var(--g3)}
+nav a.t{white-space:nowrap;text-decoration:none;color:var(--ink);padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:14px}
+nav a.on{background:var(--g3);color:#fff;border-color:var(--g3)}
+main{max-width:1020px;margin:auto;padding:16px 16px 40px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+.btn,.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:999px;font:inherit;cursor:pointer}
+.btn{background:var(--g3);color:#fff;border-color:var(--g3);font-weight:600}.chip.on{background:var(--g3);color:#fff;border-color:var(--g3)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+h1{font-size:34px;margin:10px 0 4px;letter-spacing:-.5px}h1 span{color:var(--g3)}h2{margin:.2em 0 .4em;font-size:20px}
+.hint{color:var(--mut);font-size:14px}
+.hero{background:linear-gradient(135deg,var(--g1),var(--card));border:1px solid var(--line);border-radius:22px;padding:26px 20px;margin-bottom:16px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.tile{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;transition:transform .15s,border-color .15s}
+.tile:hover{transform:translateY(-3px);border-color:var(--g3)}.tile b{font-size:18px}.tile i{font-style:normal;font-size:30px;display:block}.tile p{margin:.3em 0 0;color:var(--mut);font-size:14px}
+#gl{height:420px;border-radius:14px;background:radial-gradient(circle at 50% 40%,var(--g1),var(--card));touch-action:none;cursor:grab;overflow:hidden}
+#gl canvas{display:block;width:100%;height:100%}
+.parts button{display:block;width:100%;text-align:left;margin:0 0 6px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
+.parts button.on{background:var(--g2);border-color:var(--g3);color:#23392f}
+.out{border-left:4px solid var(--g3);padding:8px 12px;background:var(--g1);border-radius:8px;margin-top:10px}
+.slots{display:flex;align-items:center;gap:10px;margin:8px 0}
+.slot{flex:1;min-height:44px;border:2px dashed var(--g2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.reag{display:flex;flex-wrap:wrap;gap:6px}.reag .chip{padding:6px 12px;font-size:14px}.reag .chip.on{outline:2px solid var(--g3)}
+#cv{width:100%;max-width:340px;display:block;margin:auto;border-radius:16px;background:linear-gradient(#1f3a2d,#0f1c15)}
+input[type=text]{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+select{padding:9px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+#notesout h2{color:var(--g3);border-bottom:2px solid var(--g2);padding-bottom:4px}#notesout ul{padding-left:20px}
+.mapbox{overflow-x:auto;border-radius:14px;background:var(--bg)}.mapbox svg{min-width:640px;width:100%;height:auto;display:block}
+.fc{perspective:900px;max-width:520px;margin:12px auto}.fc>div{min-height:200px;border-radius:20px;border:2px solid var(--g2);background:var(--g1);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:20px;cursor:pointer;transition:transform .4s,background .3s;transform-style:preserve-3d}
+.fc>div.back{background:var(--g2);color:#23392f}
+.opt{display:block;width:100%;text-align:left;margin:0 0 8px;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
+.opt.ok{border-color:#3fae6e;background:#d6f2e2;color:#1b3a29}.opt.no{border-color:#e07a7a;background:#fbe1e1;color:#4a1f1f}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--g3);width:0;transition:width .3s}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:10px 18px 30px}
+</style>
+</head>
+<body>
+<nav id="nav"></nav>
+<main>
+<section id="home">
+<div class="hero"><h1>🌿 Aqnis <span>biology</span></h1><p class="hint" style="font-size:16px;margin:0">Биология және химия емтихандарына дайындыққа арналған платформа: 3D-зертхана, химиялық тәжірибелер, конспект, ми картасы, карточкалар және тесттер.</p></div>
+<div class="tiles" id="tiles"></div>
+</section>
+<section id="bio">
+<div class="row" id="models"></div>
+<div class="grid">
+<div class="card"><div id="gl"></div>
+<div class="row" style="margin:10px 0 0"><button class="chip" id="rot">⏸ Айналуды тоқтату</button><button class="chip" id="rst">↺ Бастапқы қалып</button></div>
+<p class="hint">Сүйреп айналдырыңыз, дөңгелекпен немесе екі саусақпен жақындатыңыз. Бөлікті таңдағанда қалғандары күңгірттенеді.</p></div>
+<div class="card"><h2 id="mt"></h2><div class="parts" id="parts"></div><div class="out" id="pd"></div></div>
+</div>
+</section>
+<section id="chem">
+<div class="grid">
+<div class="card">
+<h2>Екі затты таңдаңыз</h2>
+<div class="slots"><div class="slot" id="sa">?</div><b>+</b><div class="slot" id="sb">?</div></div>
+<div class="row"><button class="btn" id="mix">▶️ Араластыру</button><button class="chip" id="clr">Тазалау</button></div>
+<div class="reag" id="reag"></div>
+<p class="hint">Базада 23 реакция: шыжылдайды, жанады, тұнба түседі, түсі өзгереді. Заттардың аты — үстінен меңзегенде.</p>
+</div>
+<div class="card"><canvas id="cv"></canvas><div class="out" id="res">Екі затты таңдап, «Араластыру» түймесін басыңыз.</div></div>
+</div>
+</section>
+<section id="notes"></section>
+<section id="mindmap"></section>
+<section id="cards"></section>
+<section id="quiz"></section>
+</main>
+<footer>Aqnis biology · Конспект, ми картасы, карточкалар мен тесттерді жасанды интеллект жасайды: маңызды деректерді оқулықпен тексеріңіз.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+/* ---------- Навигация ---------- */
+const PAGES=[['home','🏠','Басты бет',''],['bio','🔬','3D-зертхана','Жасуша, митохондрия, хлоропласт, ДНҚ, бұлшықет, көз, ми, жүрек: айналдырып, бөліктерін зерттеңіз.'],['chem','⚗️','Химия зертханасы','Заттарды араластырыңыз: шыжылдайды, жанады, тұнба түседі. Әр реакцияның теориясымен.'],['notes','📝','Конспект','Кез келген тақырып бойынша құрылымдалған конспект.'],['mindmap','🧠','Ми картасы','Тақырыпты көрнекі схема түрінде көріңіз.'],['cards','🃏','Карточкалар','Жаттау үшін сұрақ-жауап карточкалары.'],['quiz','✅','Тест','Таңдауы бар тест және түсініктемелер.']];
+$('#nav').innerHTML='<a class="lg" href="#home">🌿 Aqnis <span>biology</span></a>'+PAGES.slice(1).map(p=>'<a class="t" href="#'+p[0]+'">'+p[1]+' '+p[2]+'</a>').join('');
+$('#tiles').innerHTML=PAGES.slice(1).map(p=>'<a class="tile" href="#'+p[0]+'"><i>'+p[1]+'</i><b>'+p[2]+'</b><p>'+p[3]+'</p></a>').join('');
+function route(){
+  const h=(location.hash||'#home').slice(1),id=PAGES.some(p=>p[0]===h)?h:'home';
+  document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('on',s.id===id));
+  document.querySelectorAll('nav a.t').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+  scrollTo(0,0);if(id==='bio')resize();
+}
+addEventListener('hashchange',route);
+
+/* ---------- 3D ---------- */
+let scene,cam,ren,grp,parts={},sel=null,drag=false,px=0,py=0,cur='cell',auto=true;
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const mk=(c,o=1)=>new THREE.MeshStandardMaterial({color:c,transparent:true,opacity:o,roughness:.5,side:THREE.DoubleSide});
+const reg=(id,m)=>{m.userData.o=m.material.opacity;grp.add(m);(parts[id]=parts[id]||[]).push(m)};
+function P(id,geo,col,op=1,pos=[0,0,0],scl=[1,1,1],rot=[0,0,0]){const m=new THREE.Mesh(geo,mk(col,op));m.position.set(...pos);m.scale.set(...scl);m.rotation.set(...rot);reg(id,m)}
+function C(id,a,b,r,col,op=1){const d=V(b[0]-a[0],b[1]-a[1],b[2]-a[2]),L=d.length(),m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,L,10),mk(col,op));m.position.set((a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2);m.quaternion.setFromUnitVectors(V(0,1,0),d.normalize());reg(id,m)}
+const S=(r,a=0,b=6.283,c=0,d=3.1416)=>new THREE.SphereGeometry(r,28,20,a,b,c,d);
+const TOR=(r,t)=>new THREE.TorusGeometry(r,t,10,40);
+const PI=Math.PI;
+const M={
+cell:{t:'Жасуша',z:6.5,parts:[['mem','Жасуша мембранасы','Липидті қос қабат, заттардың өтуін таңдап реттейді.'],['nuc','Ядро','Тұқым қуалайтын ақпарат (ДНҚ) сақталады, жасушаның әрекетін басқарады.'],['nl','Ядрошық','Рибосомалық РНҚ синтезделіп, рибосома бөлшектері жиналады.'],['er','Эндоплазмалық тор','Мембраналық арналар жүйесі: ақуыз бен липид синтезі, заттар тасымалы.'],['mit','Митохондрия','Жасушаның «энергия станциясы»: АТФ синтезі.'],['gol','Гольджи кешені','Заттарды жинақтап, өзгертіп, жасушадан шығаруға дайындайды.'],['lys','Лизосома','Қорыту ферменттері бар, ескірген бөлшектер мен бөтен заттарды ыдыратады.']],
+ b(){P('mem',S(1.7),0xbfe3cf,.22);P('nuc',S(.65),0xb7a6e6,.95,[-.2,.1,0]);P('nl',S(.2),0x6c55b8,1,[-.2,.1,.45]);
+ [[1.2,0,0],[0,1,.5],[.6,1.1,.2]].forEach(r=>P('er',TOR(.95,.06),0xf2c27a,.95,[-.2,.1,0],[1,1,1],r));
+ [[1,.5,.4,.4],[.9,-.7,-.5,1],[-1,-.8,.4,2],[.2,1,-.9,.7]].forEach(q=>P('mit',S(.3),0xf08a7a,1,[q[0],q[1],q[2]],[1.6,.8,.8],[0,0,q[3]]));
+ for(let i=0;i<5;i++)P('gol',S(.45),0xf6d77a,1,[-1,.4+i*.11,-.5],[1,.1,1]);
+ [[.5,-1.1,.5],[1.2,-.2,-.8],[-1.2,.5,.7],[-.3,-1,-.9]].forEach(p=>P('lys',S(.13),0x78c28f,1,p))}},
+mito:{t:'Митохондрия',z:5.5,parts:[['out','Сыртқы мембрана','Тегіс мембрана, порин арқасында шағын молекулаларды өткізеді.'],['inn','Ішкі мембрана','Қатпарлы, құрамында тыныс алу тізбегі мен АТФ-синтаза бар, тотығу фосфорлануы осында жүреді.'],['cri','Кристалар','Ішкі мембрананың қатпарлары. АТФ синтезі үшін беткі қабатты ұлғайтады.'],['mat','Матрикс','Ішкі құрамы: Кребс циклінің ферменттері, май қышқылдарының тотығуы.'],['dna','мтДНҚ','Сақиналы ДНҚ мен рибосомалар: митохондрия ішінара дербес (симбиогенез теориясы).']],
+ b(){P('out',S(1),0xf2a99f,.3,[0,0,0],[2,1,1]);P('inn',S(1),0xe58a7b,.45,[0,0,0],[1.8,.8,.8]);P('mat',S(1),0xf8dca4,.55,[0,0,0],[1.55,.6,.6]);
+ for(let i=-3;i<=3;i++){const x=i*.38,r=.7*Math.sqrt(1-(x/1.8)**2);P('cri',new THREE.CylinderGeometry(r,r,.05,24),0xd9776a,.95,[x,i%2?.15:-.15,0],[1,1,1],[0,0,PI/2])}
+ P('dna',TOR(.17,.035),0x3f7fbf,1,[.2,-.1,.1],[1,1,1],[1,.4,0])}},
+chl:{t:'Хлоропласт',z:6,parts:[['env','Қос мембрана','Сыртқы және ішкі мембрана хлоропластты цитоплазмадан бөліп тұрады.'],['str','Строма','Ішкі сұйық зат: Кальвин циклінің ферменттері (қараңғы фаза), ДНҚ мен рибосомалар.'],['gra','Грана','Тилакоид дисктерінің бумасы. Хлорофилл жарықты сіңіреді, жарық фазасы осында өтеді.'],['lam','Строма тилакоидтері','Граналарды бір-бірімен байланыстыратын ламеллалар.'],['sta','Крахмал дәні','Фотосинтез өнімі — глюкозаның қор түрі.'],['dna','хлДНҚ','Хлоропластың өз сақиналы ДНҚ-сы (симбиогенез дәлелі).']],
+ b(){P('env',S(1),0x9fd6a8,.22,[0,0,0],[2.1,1.2,1.2]);P('str',S(1),0xcdeeb0,.3,[0,0,0],[1.95,1.05,1.05]);
+ const G=[[-1,0,.3],[-.2,0,-.35],[.6,0,.35],[1.2,0,-.2],[-.4,0,.6]];
+ G.forEach(g=>{for(let k=0;k<6;k++)P('gra',new THREE.CylinderGeometry(.3,.3,.05,24),0x3f9a58,1,[g[0],-.22+k*.09,g[2]])});
+ for(let i=0;i<4;i++)C('lam',[G[i][0],0,G[i][2]],[G[i+1][0],0,G[i+1][2]],.03,0x7fcf8f);
+ P('sta',S(.28),0xffffff,1,[1.3,-.5,.5],[1,.7,.7]);P('dna',TOR(.15,.03),0x3f7fbf,1,[-1.4,.5,.3],[1,1,1],[1,.3,0])}},
+dna:{t:'ДНҚ қос спиралі',z:7.5,parts:[['sa','Бірінші тізбек','Дезоксирибоза мен фосфат қалдықтарынан тұратын омыртқа. Тізбектер антипараллель (5’→3’ және 3’→5’).'],['sb','Екінші тізбек','Бірінші тізбекке комплементарлы әрі антипараллель. Қос спираль бір орамы шамамен 10 нуклеотидті қамтиды.'],['bas','Азотты негіздер','Комплементарлық: A–T (екі сутектік байланыс), G–C (үш). Чаргафф ережесі: A=T, G=C.']],
+ b(){const n=44,pt=(i,s)=>{const a=i*.55+s*PI;return[Math.cos(a),(i-n/2)*.12,Math.sin(a)]};
+ const BP=[[0xe86a6a,0xf2d45c],[0xf2d45c,0xe86a6a],[0x5a8fe0,0x58c27d],[0x58c27d,0x5a8fe0]];
+ for(let i=0;i<n;i++){if(i<n-1){C('sa',pt(i,0),pt(i+1,0),.05,0x4f9b78);C('sb',pt(i,1),pt(i+1,1),.05,0x6bb5e6)}
+ const a=pt(i,0),b=pt(i,1),m=[(a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2],c=BP[i%4];C('bas',a,m,.07,c[0]);C('bas',m,b,.07,c[1])}}},
+mus:{t:'Бұлшықет талшығы',z:7.5,parts:[['sar','Сарколемма','Бұлшықет талшығының жасуша мембранасы.'],['zl','Z-сызық','Саркомердің шекарасы, актин жіпшелері осы жерге бекітіледі.'],['mio','Миозин (жуан жіпше)','Басшалары актинмен көлденең көпір түзіп, АТФ энергиясымен тартады.'],['act','Актин (жіңішке жіпше)','Жиырылғанда актин миозин арасына сырғиды: саркомер қысқарады, жіпшелердің өзі қысқармайды (сырғу теориясы).']],
+ b(){P('sar',new THREE.CylinderGeometry(1.2,1.2,5.4,32,1,true),0xf29a94,.22,[0,0,0],[1,1,1],[0,0,PI/2]);
+ [-2.4,0,2.4].forEach(x=>P('zl',new THREE.CylinderGeometry(1.05,1.05,.06,32),0x6e7f8f,.9,[x,0,0],[1,1,1],[0,0,PI/2]));
+ const Q=[[0,0],[.5,.4],[-.5,.4],[.5,-.4],[-.5,-.4]],A=[[.25,.7],[-.25,.7],[.25,-.7],[-.25,-.7],[.8,0],[-.8,0]];
+ [-1.2,1.2].forEach(c=>{Q.forEach(q=>C('mio',[c-.85,q[0],q[1]],[c+.85,q[0],q[1]],.1,0xd9534f));
+ A.forEach(q=>{C('act',[c-1.2,q[0],q[1]],[c-.1,q[0],q[1]],.04,0x4f9bd6);C('act',[c+1.2,q[0],q[1]],[c+.1,q[0],q[1]],.04,0x4f9bd6)})})}},
+eye:{t:'Көз',z:5.5,parts:[['scl','Склера','Тығыз ақ қабық, көздің пішінін сақтап, қорғайды.'],['cor','Мөлдір қабық','Алдыңғы мөлдір бөлігі, көздің сындыру күшінің шамамен үштен екісін береді.'],['iri','Сәулелі қабық','Бұлшықеттері қарашық диаметрі мен жарық мөлшерін реттейді.'],['pup','Қарашық','Сәулелі қабықтағы ашық, жарық осы арқылы хрусталикке өтеді.'],['len','Хрусталик','Мөлдір қос дөңес линза; кірпікше бұлшықет оның қисықтығын өзгертеді (аккомодация).'],['ret','Торлы қабық','Таяқшалар (ымырттағы көру) мен колбочкалар (түсті көру) бар.'],['ner','Көру нерві','Торлы қабықтан сигналдарды желке бөлігінің көру қыртысына жеткізеді.']],
+ b(){P('scl',S(1,0,6.283,.55,2.6),0xf7f4ee,.6,[0,0,0],[1,1,1],[PI/2,0,0]);P('cor',S(.55,0,6.283,0,1.05),0x9fd4f0,.4,[0,0,.62],[1,1,1],[PI/2,0,0]);
+ P('iri',new THREE.RingGeometry(.14,.5,40),0x4a9a7a,1,[0,0,.83]);P('pup',new THREE.CircleGeometry(.14,32),0x101010,1,[0,0,.8]);
+ P('len',S(.4),0xfff1b8,.75,[0,0,.55],[1,1,.55]);P('ret',S(.96,0,6.283,1.9,1.3),0xd9645a,1,[0,0,0],[1,1,1],[PI/2,0,0]);
+ P('ner',new THREE.CylinderGeometry(.13,.13,.9,20),0xf2d07a,1,[0,0,-1.4],[1,1,1],[PI/2,0,0])}},
+brain:{t:'Ми',z:5.5,parts:[['fro','Маңдай бөлігі','Ойлау, жоспарлау, сөйлеу (Брока орталығы), еркін қозғалыстар.'],['par','Төбе бөлігі','Тері-бұлшықет сезімталдығы, кеңістікте бағдарлау.'],['tem','Самай бөлігі','Есту, сөйлеу (Верника орталығы), жады.'],['occ','Желке бөлігі','Көру қыртысы: көру ақпаратын өңдеу.'],['cer','Мишық','Қозғалыстарды үйлестіру, тепе-теңдік, бұлшықет тонусы.'],['ste','Ми діңі','Тыныс алу, жүрек соғуы, рефлекстер; жұлынмен байланыс.']],
+ b(){const L=(id,col,p,s,r)=>[-1,1].forEach(k=>P(id,S(r),col,1,[p[0]*k,p[1],p[2]],s));
+ L('fro',0xf6b8c4,[.4,.25,.85],[1,1,1],.6);L('par',0xf8d9a0,[.42,.85,-.1],[1,.9,1],.58);L('tem',0xa9d8f0,[.85,-.15,.25],[.55,.5,1],.62);L('occ',0xc7b3ee,[.38,.3,-1],[1,1,1],.5);L('cer',0x8fbf9f,[.3,-.55,-.95],[1.1,.8,1],.4);
+ P('ste',new THREE.CylinderGeometry(.2,.14,1,16),0xd6c4a8,1,[0,-.9,-.3],[1,1,1],[.25,0,0])}},
+heart:{t:'Жүрек',z:6,parts:[['lv','Сол жақ қарынша','Қабырғасы ең қалың; оттекке бай қанды қолқа арқылы үлкен қан айналым шеңберіне айдайды.'],['rv','Оң жақ қарынша','Оттексіз қанды өкпе артериясы арқылы өкпеге айдайды (шағын шеңбер).'],['la','Сол жақ жүрекше','Өкпеден оттекке бай қанды қабылдайды.'],['ra','Оң жақ жүрекше','Денеден оттексіз қанды қабылдайды.'],['ao','Қолқа','Ең ірі артерия, оттекті қанды барлық ағзаларға таратады.'],['pa','Өкпе артериясы','Оттексіз қанды өкпеге апарады: артерия, бірақ ішінде веналық қан ағады.'],['vc','Жоғарғы қуыс вена','Бастан және қолдардан оттексіз қанды оң жүрекшеге әкеледі.']],
+ b(){P('lv',S(.85),0xe8756e,1,[.45,-.3,0],[1,1.25,1]);P('rv',S(.75),0x7aa6e0,1,[-.5,-.15,.25],[1,1.1,.9]);P('la',S(.45),0xf29a94,1,[.8,.9,-.25]);P('ra',S(.45),0x9bbcec,1,[-.8,.8,.1]);
+ C('ao',[.25,.9,0],[.1,1.8,0],.22,0xd9534f);C('ao',[.1,1.8,0],[-.5,1.7,-.2],.2,0xd9534f);C('ao',[-.5,1.7,-.2],[-.6,1.1,-.35],.2,0xd9534f);
+ C('pa',[-.3,.85,.5],[-.95,1.5,.75],.17,0x5a8fe0);C('vc',[-.85,1.15,-.1],[-.9,2.1,-.2],.14,0x5a8fe0)}}
+};
+function pick(id){sel=id;
+  document.querySelectorAll('#parts button').forEach(b=>b.classList.toggle('on',b.dataset.id===id));
+  for(const k in parts)parts[k].forEach(m=>{m.material.emissive.setHex(k===id?0x2f8f5f:0);m.material.opacity=id&&k!==id?m.userData.o*.3:m.userData.o});
+  const p=M[cur].parts.find(x=>x[0]===id);$('#pd').innerHTML=p?'<b>'+p[1]+'.</b> '+p[2]:'Бөлікті таңдап, ол туралы оқыңыз.';}
+function setModel(k){cur=k;
+  document.querySelectorAll('#models .chip').forEach(c=>c.classList.toggle('on',c.dataset.k===k));
+  $('#mt').textContent=M[k].t;
+  $('#parts').innerHTML=M[k].parts.map(p=>'<button data-id="'+p[0]+'">'+p[1]+'</button>').join('');
+  document.querySelectorAll('#parts button').forEach(b=>b.onclick=()=>pick(b.dataset.id===sel?null:b.dataset.id));
+  if(grp){while(grp.children.length)grp.remove(grp.children[0]);parts={};M[k].b();grp.rotation.set(.25,0,0);cam.position.z=M[k].z;}
+  pick(null);}
+$('#models').innerHTML=Object.entries(M).map(([k,v])=>'<button class="chip" data-k="'+k+'">'+v.t+'</button>').join('');
+document.querySelectorAll('#models .chip').forEach(c=>c.onclick=()=>setModel(c.dataset.k));
+function resize(){if(!ren)return;const e=$('#gl'),w=e.clientWidth||600,h=e.clientHeight||420;ren.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()}
+function init(){const e=$('#gl');
+  if(!window.THREE){e.innerHTML='<p style="padding:20px">3D қозғалтқышын жүктеу мүмкін болмады.</p>';return}
+  scene=new THREE.Scene();cam=new THREE.PerspectiveCamera(45,1,.1,100);
+  ren=new THREE.WebGLRenderer({antialias:true,alpha:true});ren.setPixelRatio(Math.min(devicePixelRatio,2));e.appendChild(ren.domElement);
+  scene.add(new THREE.AmbientLight(0xffffff,.75));const d=new THREE.DirectionalLight(0xffffff,.8);d.position.set(3,4,5);scene.add(d);
+  grp=new THREE.Group();scene.add(grp);setModel(cur);resize();
+  e.onpointerdown=ev=>{drag=true;px=ev.clientX;py=ev.clientY;e.setPointerCapture(ev.pointerId)};
+  e.onpointermove=ev=>{if(!drag)return;grp.rotation.y+=(ev.clientX-px)*.01;grp.rotation.x+=(ev.clientY-py)*.01;px=ev.clientX;py=ev.clientY};
+  e.onpointerup=()=>drag=false;
+  e.onwheel=ev=>{ev.preventDefault();cam.position.z=Math.max(2.5,Math.min(12,cam.position.z+ev.deltaY*.005))};
+  addEventListener('resize',resize);
+  (function loop(){requestAnimationFrame(loop);if(auto&&!drag)grp.rotation.y+=.004;ren.render(scene,cam)})();}
+$('#rot').onclick=()=>{auto=!auto;$('#rot').textContent=auto?'⏸ Айналуды тоқтату':'▶️ Айналуды бастау'};
+$('#rst').onclick=()=>{if(grp){grp.rotation.set(.25,0,0);cam.position.z=M[cur].z}};
+init();if(!grp)setModel('cell');
+
+/* ---------- Химия ---------- */
+const RE={HCl:'тұз қышқылы',NaOH:'натрий гидроксиді',H2SO4:'күкірт қышқылы',CuSO4:'мыс сульфаты',AgNO3:'күміс нитраты',NaCl:'натрий хлориді',BaCl2:'барий хлориді',Zn:'мырыш',Mg:'магний',Fe:'темір',Na:'натрий',H2O:'су',CaCO3:'бор, кальций карбонаты',FeCl3:'темір(III) хлориді',KI:'калий иодиді','Pb(NO3)2':'қорғасын нитраты',NaHCO3:'сода',CH3COOH:'сірке қышқылы',H2O2:'сутек пероксиді',MnO2:'марганец(IV) оксиді',O2:'оттек',H2:'сутек',CH4:'метан',C2H5OH:'этанол',CaO:'сөндірілмеген әк',Фф:'фенолфталеин'};
+const sub=s=>s.replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d]);
+const key=(a,b)=>[a,b].sort().join('|');
+const R={};
+[
+['HCl','NaOH','HCl + NaOH → NaCl + H₂O','Бейтараптану','#d9efe4','','steam','Қышқыл мен негіз тұз және су түзеді. Иондық теңдеу: H⁺ + OH⁻ → H₂O. Реакция экзотермиялық.'],
+['H2SO4','NaOH','H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O','Бейтараптану','#d9efe4','','steam','Екі негізді қышқыл сілтінің екі мольімен әрекеттесіп, орташа тұз — натрий сульфатын түзеді.'],
+['HCl','CaCO3','CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂↑','Газ бөле жүретін алмасу','#d9efe4','','fizz','Күшті қышқыл әлсіз көмір қышқылын ығыстырады, ол су мен CO₂-ге ыдырайды. Карбонаттарға сапалық реакция.'],
+['CH3COOH','NaHCO3','CH₃COOH + NaHCO₃ → CH₃COONa + H₂O + CO₂↑','Газ бөле жүретін алмасу','#d9efe4','','fizz','Сірке қышқылы содадан көмір қышқылын ығыстырады. CO₂ қарқынды бөлінеді (соданы сөндіру).'],
+['HCl','Zn','Zn + 2HCl → ZnCl₂ + H₂↑','Орынбасу','#d9efe4','','fizz','Мырыш белсенділік қатарында сутектің сол жағында тұрады да, қышқылдан оны ығыстырады. Тотықтырғыш H⁺, тотықсыздандырғыш Zn⁰.'],
+['H2SO4','Zn','Zn + H₂SO₄(сұйылт.) → ZnSO₄ + H₂↑','Орынбасу','#d9efe4','','fizz','Сұйылтылған күкірт қышқылы сутекке дейінгі металдармен әдеттегі қышқылдай әрекеттеседі.'],
+['HCl','Mg','Mg + 2HCl → MgCl₂ + H₂↑','Орынбасу','#d9efe4','','fizz,steam','Магний мырыштан белсендірек, реакция қарқынды жүреді және жылу бөлінеді. H₂ газы шатырлап жанады.'],
+['CuSO4','NaOH','CuSO₄ + 2NaOH → Cu(OH)₂↓ + Na₂SO₄','Алмасу, тұнба','#cfe9f7','#4f9de0','ppt','Мыс(II) гидроксидінің көгілдір желе тәрізді тұнбасы түзіледі. Cu²⁺ иондарына сапалық реакция.'],
+['FeCl3','NaOH','FeCl₃ + 3NaOH → Fe(OH)₃↓ + 3NaCl','Алмасу, тұнба','#f3e2a8','#a9602f','ppt','Темір(III) гидроксидінің қоңыр тұнбасы. Fe³⁺ иондарына сапалық реакция.'],
+['AgNO3','NaCl','AgNO₃ + NaCl → AgCl↓ + NaNO₃','Алмасу, тұнба','#e3f1ea','#f4f4f4','ppt','Күміс хлоридінің ақ ірімшік тәрізді тұнбасы. Хлорид-иондарына сапалық реакция.'],
+['BaCl2','H2SO4','BaCl₂ + H₂SO₄ → BaSO₄↓ + 2HCl','Алмасу, тұнба','#e3f1ea','#fafafa','ppt','Барий сульфатының ақ тұнбасы, қышқылдарда ерімейді. Сульфат-иондарына сапалық реакция.'],
+['KI','Pb(NO3)2','Pb(NO₃)₂ + 2KI → PbI₂↓ + 2KNO₃','Алмасу, тұнба','#eef2d2','#f2d53c','ppt','Қорғасын иодидінің ашық сары тұнбасы («алтын жаңбыр»). Pb²⁺ иондарына сапалық реакция.'],
+['Fe','CuSO4','Fe + CuSO₄ → FeSO₄ + Cu↓','Орынбасу','#c9e6b8','#c8794a','ppt','Темір мыстан белсендірек, оны ерітіндіден ығыстырады. Ерітіндінің көк түсі жасылға ауысады, темірге мыс отырады.'],
+['Zn','CuSO4','Zn + CuSO₄ → ZnSO₄ + Cu↓','Орынбасу','#e3f1ea','#c8794a','ppt','Мырыш мыстан белсендірек. Ерітінді түссізденеді, қызғылт мыс бөлінеді.'],
+['Na','H2O','2Na + 2H₂O → 2NaOH + H₂↑','Орынбасу (сілтілік металл)','#d9efe4','','ball,fizz,flame,steam','Натрий сумен қарқынды әрекеттесіп, сілті мен сутек түзеді. Реакция қатты жылу бөледі, металл шар болып балқып, су бетінде жүгіреді, сары жалынмен жанады.','#ffc83a'],
+['H2O2','MnO2','2H₂O₂ → 2H₂O + O₂↑ (катализатор MnO₂)','Ыдырау, катализ','#d9efe4','','fizz,steam','MnO₂ пероксидтің ыдырауын жеделдетеді, өзі жұмсалмайды. Бөлінген оттек түтеген шырпыны жандырады.'],
+['CaO','H2O','CaO + H₂O → Ca(OH)₂','Қосылу, экзотермиялық','#efefe6','','steam,hot','Сөндірілмеген әк сумен қосылып, сөндірілген әк түзеді. Қатты қызады, су буланып бу көтеріледі, ерітінді сүттей лайланады.'],
+['NaOH','Фф','Фенолфталеин + OH⁻ → қызыл-күлгін түс','Индикатор','#e0508f','','color','Фенолфталеин сілтілік ортада (pH > 8,2) малина түске боялады, қышқыл мен бейтарап ортада түссіз.'],
+['Mg','O2','2Mg + O₂ → 2MgO','Жану (тотығу)','','','flash,flame','Магний көз қарыстырарлық ақ жарқылмен жанады, ақ ұнтақ — магний оксиді түзіледі. Тотықсыздандырғыш Mg⁰, тотықтырғыш O₂.','#ffffff'],
+['H2','O2','2H₂ + O₂ → 2H₂O','Жану, жарылыс','','','pop,flame','Сутек пен оттек қоспасы (қышты газ) сыртылдап жарылады. Таза сутек түссіз-көкшіл жалынмен жанады, өнімі — су.','#9fd0ff'],
+['CH4','O2','CH₄ + 2O₂ → CO₂ + 2H₂O','Жану','','','flame','Метан (табиғи газ) көкшіл жалынмен жанып, көмірқышқыл газы мен су түзеді. Толық жану кезінде күйе болмайды.','#6fa8ff'],
+['C2H5OH','O2','C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O','Жану','','','flame','Этанол ақшыл көк, түссіз жалынмен жанады. Толық жану өнімдері — CO₂ және H₂O.','#8fb8ff']
+].forEach(r=>R[key(r[0],r[1])]={eq:r[2],type:r[3],liq:r[4],ppt:r[5],fx:r[6].split(','),th:r[7],fc:r[8]||'#ffb43a'});
+let A=null,B=null;
+$('#reag').innerHTML=Object.keys(RE).map(k=>'<button class="chip" data-r="'+k+'" title="'+RE[k]+'">'+sub(k)+'</button>').join('');
+function marks(){document.querySelectorAll('[data-r]').forEach(c=>c.classList.toggle('on',c.dataset.r===A||c.dataset.r===B));$('#sa').textContent=A?sub(A):'?';$('#sb').textContent=B?sub(B):'?'}
+document.querySelectorAll('[data-r]').forEach(c=>c.onclick=()=>{const k=c.dataset.r;if(k===A){A=B;B=null}else if(k===B)B=null;else if(!A)A=k;else B=k;marks()});
+const cv=$('#cv'),cx=cv.getContext('2d'),W=300,H=340;cv.width=W*2;cv.height=H*2;cx.scale(2,2);
+const hex=h=>h?[1,3,5].map(i=>parseInt(h.substr(i,2),16)):null,rgb=c=>'rgb('+c.map(Math.round)+')';
+const F={col:[217,239,228],lvl:.45,tcol:null,tl:.45,ppt:'',pptH:0,pptT:0,fx:[],t:0,on:false,fc:'#ffb43a',pop:false,flash:0};
+let bub=[],fl=[],st=[],pp=[],spk=[],last=0;
+const rnd=(a,b)=>a+Math.random()*(b-a),yT=()=>298-F.lvl*190,has=k=>F.fx.includes(k);
+function step(dt){
+  const k=F.on?(F.t<7?1:Math.max(0,1-(F.t-7)/3)):0;if(F.on){F.t+=dt;if(F.t>10)F.on=false}
+  if(F.tcol)for(let i=0;i<3;i++)F.col[i]+=(F.tcol[i]-F.col[i])*Math.min(1,dt*1.5);
+  F.lvl+=(F.tl-F.lvl)*Math.min(1,dt*2);
+  if(F.on&&F.t>1)F.pptH+=(F.pptT-F.pptH)*Math.min(1,dt*.5);
+  const n=(r)=>{const x=r*dt;return Math.floor(x)+(Math.random()<x%1?1:0)},y0=yT();
+  if(has('fizz')&&F.lvl>.1)for(let i=n(45*k);i>0;i--)bub.push({x:rnd(105,195),y:rnd(y0+20,290),r:rnd(1.5,5),v:rnd(40,90)});
+  if(has('steam'))for(let i=n(14*k*(has('hot')?2:1));i>0;i--)st.push({x:rnd(110,190),y:Math.min(y0,200)-5,vx:rnd(-8,8),r:rnd(6,12),l:1});
+  if(has('flame')){const bx=has('ball')?150+55*Math.sin(F.t*3):150,by=has('ball')?y0-8:80,w=has('ball')?10:32;
+    for(let i=n(110*k);i>0;i--)fl.push({x:bx+rnd(-w,w),y:by,vx:rnd(-10,10),vy:rnd(-110,-60),r:rnd(6,14),l:1});}
+  if(has('ppt')&&F.on&&F.t<4)for(let i=n(70);i>0;i--)pp.push({x:rnd(100,200),y:y0+rnd(0,15),v:rnd(30,60)});
+  if(has('flash')&&F.on&&F.t<.2)F.flash=1;
+  if(has('pop')&&F.on&&F.t>.8&&!F.pop){F.pop=true;F.flash=1;for(let i=0;i<30;i++)spk.push({x:150,y:90,vx:rnd(-160,160),vy:rnd(-160,40),l:1})}
+  if(has('flash')&&F.on&&k>0&&Math.random()<dt*30)spk.push({x:150,y:90,vx:rnd(-90,90),vy:rnd(-130,-20),l:1});
+  F.flash=Math.max(0,F.flash-dt*(has('pop')?2.5:.5*(has('flash')&&k>0?0:1)));if(has('flash')&&k>0)F.flash=Math.max(F.flash,.7*k);
+  bub=bub.filter(b=>(b.y-=b.v*dt)>y0);
+  fl.forEach(f=>{f.x+=f.vx*dt;f.y+=f.vy*dt;f.l-=dt*1.3});fl=fl.filter(f=>f.l>0);
+  st.forEach(s=>{s.x+=s.vx*dt;s.y-=30*dt;s.r+=dt*8;s.l-=dt*.45});st=st.filter(s=>s.l>0);
+  pp=pp.filter(p=>(p.y+=p.v*dt)<298-F.pptH);
+  spk.forEach(s=>{s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=200*dt;s.l-=dt*1.2});spk=spk.filter(s=>s.l>0);
+}
+function glassPath(){cx.beginPath();cx.moveTo(80,70);cx.lineTo(95,290);cx.quadraticCurveTo(95,298,105,298);cx.lineTo(195,298);cx.quadraticCurveTo(205,298,205,290);cx.lineTo(220,70)}
+function draw(){
+  cx.clearRect(0,0,W,H);const y0=yT();
+  if(F.flash>0){const g=cx.createRadialGradient(150,90,5,150,90,170);g.addColorStop(0,'rgba(255,255,255,'+F.flash+')');g.addColorStop(1,'rgba(255,255,255,0)');cx.fillStyle=g;cx.fillRect(0,0,W,H)}
+  cx.save();glassPath();cx.closePath();cx.clip();
+  if(F.lvl>.02){cx.fillStyle=rgb(F.col);cx.globalAlpha=.92;cx.fillRect(60,y0,180,320-y0);cx.globalAlpha=1;cx.fillStyle='rgba(255,255,255,.4)';cx.fillRect(60,y0,180,3)}
+  if(F.pptH>.5){cx.fillStyle=F.ppt;cx.fillRect(60,298-F.pptH,180,F.pptH)}
+  pp.forEach(p=>{cx.fillStyle=F.ppt;cx.fillRect(p.x,p.y,3,3)});
+  bub.forEach(b=>{cx.strokeStyle='rgba(255,255,255,.85)';cx.lineWidth=1.2;cx.beginPath();cx.arc(b.x,b.y,b.r,0,7);cx.stroke()});
+  cx.restore();
+  glassPath();cx.strokeStyle='rgba(255,255,255,.75)';cx.lineWidth=3;cx.lineCap='round';cx.stroke();
+  if(has('ball')&&F.on&&F.t<9){const r=Math.max(2,9-F.t),bx=150+55*Math.sin(F.t*3);cx.fillStyle='#d8dde2';cx.beginPath();cx.arc(bx,y0-r+2,r,0,7);cx.fill()}
+  fl.forEach(f=>{const g=cx.createRadialGradient(f.x,f.y,0,f.x,f.y,f.r);g.addColorStop(0,'rgba(255,255,230,'+f.l+')');g.addColorStop(.5,hexA(F.fc,f.l*.8));g.addColorStop(1,hexA(F.fc,0));cx.fillStyle=g;cx.beginPath();cx.arc(f.x,f.y,f.r,0,7);cx.fill()});
+  st.forEach(s=>{cx.fillStyle='rgba(235,245,240,'+s.l*.22+')';cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fill()});
+  spk.forEach(s=>{cx.fillStyle='rgba(255,240,160,'+s.l+')';cx.fillRect(s.x,s.y,2.5,2.5)});
+}
+const hexA=(h,a)=>{const c=hex(h);return 'rgba('+c+','+Math.max(0,a)+')'};
+(function loop(ts){requestAnimationFrame(loop);const dt=Math.min(.05,(ts-last)/1000||0);last=ts;step(dt);draw()})(0);
+function clearFx(){bub=[];fl=[];st=[];pp=[];spk=[];F.on=false;F.fx=[];F.flash=0;F.pptH=0;F.pptT=0;F.ppt='';F.pop=false}
+function reset(){A=B=null;marks();clearFx();F.tcol=[217,239,228];F.tl=.45;$('#res').textContent='Екі затты таңдап, «Араластыру» түймесін басыңыз.'}
+$('#clr').onclick=reset;
+const FX={fizz:'көпіршіктер шығып, шыжылдайды',flame:'жалын пайда болады',flash:'көз қарыстыратын ақ жарқыл',pop:'сыртылдап жарылады',steam:'жылу бөлінеді, бу көтеріледі',ball:'натрий шарик болып су бетінде жүгіреді',ppt:'тұнба түзіліп, түбіне отырады',color:'ерітіндінің түсі өзгереді',hot:'қатты қызады'};
+$('#mix').onclick=()=>{
+  if(!A||!B){$('#res').textContent='Екі зат таңдау керек.';return}
+  const r=R[key(A,B)];clearFx();
+  if(!r){F.tcol=[217,239,228];F.tl=.45;$('#res').innerHTML='<b>'+sub(A)+' + '+sub(B)+'</b><br>Базада бұл жұп үшін байқалатын реакция жоқ: не реакция жүрмейді, не заттар жай араласады. Алмасу шарттарын тексеріңіз: тұнба, газ немесе әлсіз электролит түзіле ме.';return}
+  F.fx=r.fx;F.on=true;F.t=0;F.tcol=hex(r.liq)||F.col;F.tl=r.liq?.62:0;F.ppt=r.ppt;F.pptT=r.ppt?30:0;F.fc=r.fc;
+  const dng=r.fx.some(x=>['flame','flash','pop','ball','hot'].includes(x));
+  $('#res').innerHTML='<b>'+r.eq+'</b><br><i>'+r.type+'</i><br>Бақылау: '+r.fx.map(x=>FX[x]).join('; ')+'.<br><br><b>Теория.</b> '+r.th+(dng?'<br><br>⚠️ Бұл тәжірибені тек мұғалім қадағалауымен және қорғаныс көзілдірігімен жасауға болады.':'');
+};
+
+/* ---------- ЖИ құралдары ---------- */
+const LV='<option>Мектеп деңгейі</option><option selected>ҰБТ-ға дайындық</option><option>Университет деңгейі</option>';
+const TOP=['Митохондрия және жасушалық тыныс алу','Фотосинтез','ДНҚ құрылымы және репликация','Қышқылдар мен негіздер','Тотығу-тотықсыздану реакциялары','Көздің құрылымы және көру'];
+const sel_=(id,opts,d)=>'<select id="'+id+'">'+opts.map(o=>'<option'+(o==d?' selected':'')+'>'+o+'</option>').join('')+'</select>';
+function tool(id,title,extra,btn){$('#'+id).innerHTML='<div class="card"><h2>'+title+'</h2><input type="text" class="tp" placeholder="Тақырып, мысалы: цикл Кребса, ДНҚ құрылымы, органикалық химия"><div class="row chips" style="margin-top:10px">'+TOP.map(t=>'<button class="chip">'+t+'</button>').join('')+'</div><div class="row"><select id="'+id+'lv">'+LV+'</select>'+extra+'<button class="btn" id="'+id+'go">'+btn+'</button></div></div><div class="card" id="'+id+'out"><span class="hint">Мұнда нәтиже пайда болады.</span></div>'}
+tool('notes','Кез келген тақырып бойынша конспект',sel_('noteslen',['Қысқа','Орташа','Толық'],'Орташа'),'Конспект жасау');
+tool('mindmap','Ми картасы',sel_('mindmapn',['5 тармақ','6 тармақ','8 тармақ'],'6 тармақ'),'Карта жасау');
+tool('cards','Оқуға арналған карточкалар',sel_('cardsn',['8 карточка','12 карточка','20 карточка'],'12 карточка'),'Карточкалар жасау');
+tool('quiz','Тест',sel_('quizn',['5 сұрақ','10 сұрақ','15 сұрақ'],'10 сұрақ'),'Тест жасау');
+const tps=document.querySelectorAll('.tp');
+tps.forEach(i=>i.oninput=()=>tps.forEach(o=>o.value=i.value));
+document.querySelectorAll('.chips .chip').forEach(c=>c.onclick=()=>tps.forEach(o=>o.value=c.textContent));
+const topic=id=>$('#'+id+' .tp').value.trim(),lvl=id=>$('#'+id+'lv').value,num=id=>parseInt($('#'+id+'n').value);
+async function ask(p,cb){const s=await claude.use('sample');if(!s)throw{code:'na'};const r=await s(p,{cache:false,onText:cb});return r.text}
+function parse(t){t=t.replace(/```(json)?/g,'');const i=t.search(/[\[{]/),j=Math.max(t.lastIndexOf(']'),t.lastIndexOf('}'));return JSON.parse(t.slice(i,j+1))}
+const ERR=e=>e&&e.code==='na'?'Бұл терезеде жасанды интеллект қолжетімсіз. Сайтты Claude-қа кіріп, сілтеме арқылы ашыңыз.':e&&e.code==='not_granted'?'Рұқсат берілмеді.':e&&e.code==='rate_limited'?'Сұраулар тым көп, сәл күтіңіз.':'Жасау мүмкін болмады. Қайтадан көріңіз.';
+function run(id,fn){$('#'+id+'go').onclick=async()=>{const t=topic(id),o=$('#'+id+'out');if(!t){o.textContent='Тақырыпты енгізіңіз.';return}
+  o.textContent='Жасалуда…';try{await fn(t,o)}catch(e){o.textContent=ERR(e)}}}
+const J=(t,id,x)=>'«'+t+'» тақырыбы бойынша. Деңгейі: '+lvl(id)+'. Тек қазақ тілінде жаз. '+x;
+function md(s){let o='',ul=false;for(const l of esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').split('\n')){const m=l.match(/^\s*[-*•]\s+(.*)/);
+  if(m){if(!ul){o+='<ul>';ul=true}o+='<li>'+m[1]+'</li>';continue}if(ul){o+='</ul>';ul=false}
+  if(/^#{1,4}\s/.test(l))o+='<h2>'+l.replace(/^#+\s/,'')+'</h2>';else if(l.trim())o+='<p>'+l+'</p>'}return o+(ul?'</ul>':'')}
+/* Конспект */
+let raw='';
+run('notes',async(t,o)=>{const r=await ask(J(t,'notes','Емтиханға дайындалуға арналған құрылымдалған конспект жаз. Көлемі: '+$('#noteslen').value+'. Markdown: тақырыптар ##, тізімдер сызықша арқылы, терминдер **жуан** әріппен. Құрылымы: анықтама; негізгі ұғымдар; процестер, сызбалар немесе формулалар; емтиханда жиі кететін қателер; қысқа жауаптары бар 5 өзін-өзі тексеру сұрағы. Кіріспесіз және қорытындысыз.'),({text})=>{o.innerHTML=md(text)});
+  raw=r;o.innerHTML=md(r)+'<div class="row"><button class="chip" id="cpy">Көшіру</button></div>';
+  $('#cpy').onclick=async()=>{try{await navigator.clipboard.writeText(raw);$('#cpy').textContent='Көшірілді'}catch(e){$('#cpy').textContent='Мәтінді белгілеп көшіріңіз'}}});
+/* Ми картасы */
+const PAL=['#bfe3cf','#cfe8f6','#f8e3b5','#f6cfd8','#d9d0f2','#d4efc3','#fbd9bd','#c9ece8'];
+function nd(x,y,t,f,fs,bold){const w=Math.max(60,t.length*fs*.58+22);return '<rect x="'+(x-w/2)+'" y="'+(y-fs)+'" width="'+w+'" height="'+(fs*2)+'" rx="'+fs+'" fill="'+f+'" stroke="#4f9b78" stroke-opacity=".35"/><text x="'+x+'" y="'+(y+fs*.35)+'" font-size="'+fs+'" fill="#23392f"'+(bold?' font-weight="700"':'')+'>'+esc(t)+'</text>'}
+run('mindmap',async(t,o)=>{const n=num('mindmap'),r=parse(await ask(J(t,'mindmap','Ми картасы үшін тек JSON қайтар, басқа мәтін жазба: {"c":"орталық атау","b":[{"t":"тармақ","k":["ішкі ұғым","ішкі ұғым"]}]}. Дәл '+n+' тармақ, әрқайсысында 2-4 ішкі ұғым. Әр атау 1-4 сөзден аспасын.')));
+  const m=r.b.length;let h='<g text-anchor="middle" font-family="system-ui,sans-serif">';
+  r.b.forEach((b,i)=>{const a=-PI/2+i*2*PI/m,bx=450+185*Math.cos(a),by=320+160*Math.sin(a),c=PAL[i%PAL.length],k=b.k||[];
+    h+='<line x1="450" y1="320" x2="'+bx+'" y2="'+by+'" stroke="'+c+'" stroke-width="6" stroke-linecap="round"/>';
+    k.forEach((s,j)=>{const aa=a+(j-(k.length-1)/2)*.34,x=450+350*Math.cos(aa),y=320+292*Math.sin(aa);h+='<line x1="'+bx+'" y1="'+by+'" x2="'+x+'" y2="'+y+'" stroke="'+c+'" stroke-width="2.5"/>'+nd(x,y,s,'#fff',12)});
+    h+=nd(bx,by,b.t,c,14,1)});
+  h+=nd(450,320,r.c||t,'#4f9b78',17,1).replace('fill="#23392f"','fill="#fff"')+'</g>';
+  o.innerHTML='<div class="mapbox"><svg viewBox="0 0 900 640">'+h+'</svg></div>'});
+/* Карточкалар */
+let deck=[],known=0,tot=0,flip=false;
+function showCard(){const o=$('#cardsout');
+  if(!deck.length){o.innerHTML='<h2>🎉 Барлық карточка меңгерілді!</h2><p class="hint">Білемін: '+known+' / '+tot+'</p>';return}
+  const c=deck[0];o.innerHTML='<div class="bar"><i style="width:'+(known/tot*100)+'%"></i></div><p class="hint">Білемін: '+known+' / '+tot+' · Қалды: '+deck.length+'</p><div class="fc"><div id="fcd" class="'+(flip?'back':'')+'">'+esc(flip?c.a:c.q)+'</div></div><p class="hint" style="text-align:center">Жауап үшін карточканы басыңыз</p><div class="row" style="justify-content:center"><button class="chip" id="rep">↻ Қайталаймын</button><button class="btn" id="kn">✓ Білемін</button><button class="chip" id="shf">🔀 Араластыру</button></div>';
+  $('#fcd').onclick=()=>{flip=!flip;showCard()};
+  $('#kn').onclick=()=>{deck.shift();known++;flip=false;showCard()};
+  $('#rep').onclick=()=>{deck.push(deck.shift());flip=false;showCard()};
+  $('#shf').onclick=()=>{deck.sort(()=>Math.random()-.5);flip=false;showCard()}}
+run('cards',async(t,o)=>{const n=num('cards'),r=parse(await ask(J(t,'cards','Жаттауға арналған '+n+' карточка жаз. Тек JSON массив қайтар, басқа мәтін жазба: [{"q":"сұрақ немесе термин","a":"қысқа жауап немесе анықтама"}]. Жауап 1-2 сөйлемнен аспасын.')));
+  deck=r.filter(x=>x.q&&x.a);tot=deck.length;known=0;flip=false;showCard()});
+/* Тест */
+let QZ=[],qi=0,sc=0,done=false;
+function showQ(){const o=$('#quizout');
+  if(qi>=QZ.length){o.innerHTML='<h2>Нәтиже: '+sc+' / '+QZ.length+'</h2><div class="bar"><i style="width:'+(sc/QZ.length*100)+'%"></i></div><p>'+(sc/QZ.length>=.8?'Тамаша! Тақырып жақсы меңгерілген 🎉':sc/QZ.length>=.5?'Жаман емес, қателерді қайталап шығыңыз.':'Тақырыпты қайталап, тестті қайта тапсырыңыз.')+'</p><button class="btn" id="again">Қайта тапсыру</button>';
+    $('#again').onclick=()=>{QZ.sort(()=>Math.random()-.5);qi=0;sc=0;showQ()};return}
+  const q=QZ[qi];done=false;
+  o.innerHTML='<div class="bar"><i style="width:'+(qi/QZ.length*100)+'%"></i></div><p class="hint">Сұрақ '+(qi+1)+' / '+QZ.length+' · Ұпай: '+sc+'</p><h2>'+esc(q.q)+'</h2><div id="ops">'+q.o.map((x,i)=>'<button class="opt" data-i="'+i+'">'+esc(x.t)+'</button>').join('')+'</div><div id="exp"></div>';
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(done)return;done=true;const x=q.o[b.dataset.i];if(x.ok)sc++;
+    document.querySelectorAll('.opt').forEach((e,i)=>{if(q.o[i].ok)e.classList.add('ok');else if(e===b)e.classList.add('no')});
+    $('#exp').innerHTML='<div class="out">'+esc(q.e||'')+'</div><p><button class="btn" id="nx">'+(qi+1<QZ.length?'Келесі →':'Нәтиже')+'</button></p>';
+    $('#nx').onclick=()=>{qi++;showQ()}})}
+run('quiz',async(t,o)=>{const n=num('quiz'),r=parse(await ask(J(t,'quiz','Таңдауы бар '+n+' тест сұрағын жаз. Тек JSON массив қайтар, басқа мәтін жазба: [{"q":"сұрақ","o":["жауап 1","жауап 2","жауап 3","жауап 4"],"a":0,"e":"дұрыс жауаптың қысқа түсініктемесі"}]. "a" — дұрыс жауаптың индексі (0-3). Дұрыс жауап тек біреу, қате жауаптар сенімді көрінсін.')));
+  QZ=r.filter(x=>x.q&&Array.isArray(x.o)&&x.o.length>1).map(x=>({q:x.q,e:x.e,o:x.o.map((t,i)=>({t,ok:i===x.a})).sort(()=>Math.random()-.5)}));
+  if(!QZ.length)throw{};qi=0;sc=0;showQ()});
+route();
+</script>
+</body>
+</html>
