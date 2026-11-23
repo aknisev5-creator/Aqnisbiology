@@ -284,7 +284,9 @@ const tps=document.querySelectorAll('.tp');
 tps.forEach(i=>i.oninput=()=>tps.forEach(o=>o.value=i.value));
 document.querySelectorAll('.chips .chip').forEach(c=>c.onclick=()=>tps.forEach(o=>o.value=c.textContent));
 const topic=id=>$('#'+id+' .tp').value.trim(),lvl=id=>$('#'+id+'lv').value,num=id=>parseInt($('#'+id+'n').value);
-async function ask(p,cb){const s=await claude.use('sample');if(!s)throw{code:'na'};const r=await s(p,{cache:false,onText:cb});return r.text}
+const AI_URL='https://proud-forest-1affaqnis-ai.aknisev5.workers.dev/';
+async function ask(p,cb){let r;try{r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})})}catch(e){throw{code:'net'}}
+  if(r.status===429)throw{code:'rate_limited'};if(!r.ok)throw{code:'fail'};const d=await r.json();if(!d.text)throw{code:'fail'};return d.text}
 function parse(t){t=t.replace(/```(json)?/g,'');const i=t.search(/[\[{]/),j=Math.max(t.lastIndexOf(']'),t.lastIndexOf('}'));return JSON.parse(t.slice(i,j+1))}
 const ERR=e=>e&&e.code==='na'?'Бұл терезеде жасанды интеллект қолжетімсіз. Сайтты Claude-қа кіріп, сілтеме арқылы ашыңыз.':e&&e.code==='not_granted'?'Рұқсат берілмеді.':e&&e.code==='rate_limited'?'Сұраулар тым көп, сәл күтіңіз.':'Жасау мүмкін болмады. Қайтадан көріңіз.';
 function run(id,fn){$('#'+id+'go').onclick=async()=>{const t=topic(id),o=$('#'+id+'out');if(!t){o.textContent='Тақырыпты енгізіңіз.';return}
